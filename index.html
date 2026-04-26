@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockFlow Elite — Platform Edukasi Saham #1 Indonesia</title>
+    <meta name="description" content="Belajar saham dari nol hingga mahir dengan gamifikasi, simulasi virtual portfolio, dan metode anti-gimmick. Gratis, transparan, tanpa janji profit palsu.">
+    <meta name="keywords" content="edukasi saham, belajar saham, investasi, analisis fundamental, analisis teknikal, simulasi saham">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ===== SIDEBAR NAVIGATION ===== -->
+    <nav id="sidebar" class="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-icon">
+                <svg viewBox="0 0 40 40" fill="none"><path d="M8 28L16 16L22 22L32 10" stroke="url(#grad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="grad" x1="8" y1="28" x2="32" y2="10"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#06b6d4"/></linearGradient></defs></svg>
+            </div>
+            <span class="brand-text">StockFlow<span class="brand-elite">Elite</span></span>
+        </div>
+
+        <div class="sidebar-user-card" id="userCard">
+            <div class="user-avatar" id="userAvatar">SF</div>
+            <div class="user-info">
+                <span class="user-name" id="userName">Investor Pemula</span>
+                <span class="user-level" id="userLevelBadge">Level 1 — Newbie</span>
+            </div>
+        </div>
+
+        <div class="xp-bar-container">
+            <div class="xp-bar-labels">
+                <span>XP</span>
+                <span id="xpText">0 / 500</span>
+            </div>
+            <div class="xp-bar-track">
+                <div class="xp-bar-fill" id="xpBarFill" style="width:0%"></div>
+            </div>
+        </div>
+
+        <div class="streak-display" id="streakDisplay">
+            <span class="streak-flame">🔥</span>
+            <span id="streakCount">0</span> hari berturut-turut
+        </div>
+
+        <ul class="sidebar-menu">
+            <li><a href="#dashboard" class="nav-link active" data-page="dashboard"><span class="nav-icon">📊</span>Dashboard</a></li>
+            <li><a href="#learning" class="nav-link" data-page="learning"><span class="nav-icon">📚</span>Learning Path</a></li>
+            <li><a href="#quiz" class="nav-link" data-page="quiz"><span class="nav-icon">❓</span>Quiz Arena</a></li>
+            <li><a href="#portfolio" class="nav-link" data-page="portfolio"><span class="nav-icon">💼</span>Virtual Portfolio</a></li>
+            <li><a href="#panic" class="nav-link" data-page="panic"><span class="nav-icon">😱</span>Panic Simulator</a></li>
+            <li><a href="#factcheck" class="nav-link" data-page="factcheck"><span class="nav-icon">🔍</span>Fact-Check</a></li>
+            <li><a href="#riskprofile" class="nav-link" data-page="riskprofile"><span class="nav-icon">🧠</span>Risk Profile</a></li>
+            <li><a href="#stocky" class="nav-link" data-page="stocky"><span class="nav-icon">🤖</span>AI Tutor Stocky</a></li>
+            <li><a href="#badges" class="nav-link" data-page="badges"><span class="nav-icon">🏆</span>Badges</a></li>
+            <li><a href="#analysis" class="nav-link" data-page="analysis"><span class="nav-icon">📈</span>Stock Analysis</a></li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle theme">
+                <span class="theme-icon-dark">🌙</span>
+                <span class="theme-icon-light">☀️</span>
+                <span class="theme-label">Dark Mode</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== MOBILE HEADER ===== -->
+    <header class="mobile-header" id="mobileHeader">
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <span class="mobile-brand">StockFlow<span class="brand-elite">Elite</span></span>
+        <div class="mobile-xp">
+            <span class="streak-flame">🔥</span><span id="mobileStreak">0</span>
+            <span class="mobile-level-pill" id="mobileLevelPill">Lv.1</span>
+        </div>
+    </header>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main-content" id="mainContent">
+
+        <!-- ===== DASHBOARD PAGE ===== -->
+        <section class="page active" id="page-dashboard">
+            <div class="page-header">
+                <h1>Selamat Datang, <span id="dashGreeting">Investor</span>! 👋</h1>
+                <p class="page-subtitle">Track progress belajarmu dan raih level selanjutnya.</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card stat-xp">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-value" id="dashXP">0</div>
+                    <div class="stat-label">Total XP</div>
+                </div>
+                <div class="stat-card stat-level">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-value" id="dashLevel">1</div>
+                    <div class="stat-label">Level</div>
+                </div>
+                <div class="stat-card stat-badges">
+                    <div class="stat-icon">🏅</div>
+                    <div class="stat-value" id="dashBadges">0</div>
+                    <div class="stat-label">Badges</div>
+                </div>
+                <div class="stat-card stat-streak">
+                    <div class="stat-icon">🔥</div>
+                    <div class="stat-value" id="dashStreak">0</div>
+                    <div class="stat-label">Day Streak</div>
+                </div>
+            </div>
+
+            <!-- Daily Quests -->
+            <div class="card daily-quests-card">
+                <div class="card-header">
+                    <h2>📋 Daily Quests</h2>
+                    <span class="quest-timer" id="questTimer">Reset: 00:00:00</span>
+                </div>
+                <div class="quest-list" id="questList">
+                    <!-- generated by JS -->
+                </div>
+            </div>
+
+            <!-- Level Progress -->
+            <div class="card level-roadmap-card">
+                <div class="card-header">
+                    <h2>🗺️ Level Roadmap</h2>
+                </div>
+                <div class="roadmap" id="roadmapContainer">
+                    <!-- generated by JS -->
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="card activity-card">
+                <div class="card-header">
+                    <h2>🕐 Aktivitas Terakhir</h2>
+                </div>
+                <div class="activity-list" id="activityList">
+                    <div class="activity-empty">Belum ada aktivitas. Mulai belajar sekarang!</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== LEARNING PATH PAGE ===== -->
+        <section class="page" id="page-learning">
+            <div class="page-header">
+                <h1>📚 Learning Path</h1>
+                <p class="page-subtitle">Kurikulum terstruktur dari dasar hingga mahir. Selesaikan kuis di setiap level untuk membuka level berikutnya.</p>
+            </div>
+
+            <div class="levels-container" id="levelsContainer">
+                <!-- Level 1: Basic -->
+                <div class="level-card unlocked" data-level="1" id="levelCard1">
+                    <div class="level-header">
+                        <div class="level-badge">Level 1</div>
+                        <h2>🌱 Basic — Fondasi Investasi</h2>
+                        <div class="level-status" id="levelStatus1">Terbuka</div>
+                    </div>
+                    <div class="level-modules">
+                        <div class="module-item" data-module="1-1">
+                            <span class="module-icon">📖</span>
+                            <div class="module-info">
+                                <h3>Apa Itu Saham?</h3>
+                                <p>Memahami konsep kepemilikan perusahaan, perbedaan saham biasa vs preferen.</p>
+                            </div>
+                            <button class="btn btn-sm btn-primary module-read-btn" data-module="1-1">Baca</button>
+                        </div>
+                        <div class="module-item" data-module="1-2">
+                            <span class="module-icon">📖</span>
+                            <div class="module-info">
+                                <h3>Cara Kerja Bursa Efek</h3>
+                                <p>Mekanisme perdagangan, jam bursa, lot size, dan bid-ask spread.</p>
+                            </div>
+                            <button class="btn btn-sm btn-primary module-read-btn" data-module="1-2">Baca</button>
+                        </div>
+                        <div class="module-item" data-module="1-3">
+                            <span class="module-icon">📖</span>
+                            <div class="module-info">
+                                <h3>Jenis-Jenis Investasi</h3>
+                                <p>Saham, obligasi, reksa dana, ETF — kapan pakai yang mana?</p>
+                            </div>
+                            <button class="btn btn-sm btn-primary module-read-btn" data-module="1-3">Baca</button>
+                        </div>
+                        <div class="module-item" data-module="1-4">
+                            <span class="module-icon">🎥</span>
+                            <div class="module-info">
+                                <h3>Membaca Laporan Keuangan Dasar</h3>
+                                <p>Neraca, laba rugi, arus kas — dasar yang wajib dikuasai.</p>
+                            </div>
+                            <button class="btn btn-sm btn-primary module-read-btn" data-module="1-4">Baca</button>
+                        </div>
+                    </div>
+                    <div class="level-footer">
+                        <div class="level-progress">
+                            <div class="level-progress-bar" id="levelProgress1" style="width:0%"></div>
+                        </div>
+                        <button class="btn btn-accent quiz-start-btn" data-level="1" id="quizBtn1">🎯 Mulai Kuis Level 1</button>
+                    </div>
+                </div>
+
+                <!-- Level 2: Fundamental -->
+                <div class="level-card locked" data-level="2" id="levelCard2">
+                    <div class="level-lock-overlay"><span>🔒</span><p>Selesaikan Kuis Level 1 untuk membuka</p></div>
+                    <div class="level-header">
+                        <div class="level-badge">Level 2</div>
+                        <h2>🏛️ Fundamental — Akar Perusahaan</h2>
+                        <div class="level-status" id="levelStatus2">Terkunci</div>
+                    </div>
+                    <div class="level-modules">
+                        <div class="module-item" data-module="2-1">
+                            <span class="module-icon">📖</span>
+                            <div class="module-info">
+                                <h3>PER, PBV, ROE, DER — Beyond Basics</h3>
+                                <p>Bukan sekadar rumus, tapi cara interpretasi yang benar.</p>
+                            </div>
+                            <button class="btn btn-sm btn-primary module-read-btn" data-module="2-1">Baca</button>
+                        </div>
+                        <div class="module-item" data-module="2-2">
+                            <span class="module-icon">📖</span>
+                            <div class="module-info">
+                                <h3>Economic Moat</h3>
+                                <p>Cara mengidentifikasi "benteng pertahanan" bisnis: brand, switching cost, network effect.</p>
+                            </div>
+                            <button class="btn btn-sm btn-primary module-read-btn" data-module="2-2">Baca</button>
+                        </div>
+                        <div class="module-item" data-module="2-3">
+                            <span class="module-icon">📖</span>
+                            <div class="module-info">
+                                <h3>Management Integrity</h3>
+                                <p>Cek rekam jejak direksi — transparan atau sering "ngibul"?</p>
+                            </div>
+                            <button class="btn btn-sm btn-primary module-read-btn" data-module="2-3">Baca</button>
+                        </div>
+                        <div class="module-item" data-module="2-4">
+                            <span class="module-icon">⚠️</span>
+                            <div class="module-info">
+                                <h3>Creative Accounting — Red Flags</h3>
+                                <p>Mendeteksi manipulasi laporan keuangan: revenue inflation, off-balance-sheet.</p>
+                            </div>
+                            <button class="btn btn-sm btn-primary module-read-btn" data-module="2-4">Baca</button>
+                        </div>
+                    </div>
+                    <div class="level-footer">
+                        <div class="level-progress">
+                            <div class="level-progress-bar" id="levelProgress2" style="width:0%"></div>
+                        </div>
+                        <button class="btn btn-accent quiz-start-btn" data-level="2" id="quizBtn2" disabled>🎯 Mulai Kuis Level 2</button>
+                    </div>
+                </div>
+
+                <!-- Level 3: Teknikal -->
+                <div class="level-card locked" data-level="3" id="levelCard3">
+                    <div class="level-lock-overlay"><span>🔒</span><p>Selesaikan Kuis Level 2 untuk membuka</p></div>
+                    <div class="level-header">
+                        <div class="level-badge">Level 3</div>
+                        <h2>📉 Teknikal — Membaca Pasar</h2>
+                        <div class="level-status" id="levelStatus3">Terkunci</div>
+                    </div>
+                    <div class="level-modules">
+                        <div class="module-item" data-module="3-1">
+                            <span class="module-icon">📖</span>
+                            <div class="module-info">
+                                <h3>Candlestick & Chart Patterns</h3>
+                                <p>Doji, Hammer, Head & Shoulders — sinyal yang sering salah dibaca.</p>
+                            </div>
+                            <button class="btn btn-sm btn-primary module-read-btn" data-module="3-1">Baca</button>
+                        </div>
+                        <div class="module-item" data-module="3-2">
+                            <span class="module-icon">📖</span>
+                            <div class="module-info">
+                                <h3>Volume Analysis</h3>
+                                <p>Mengapa harga naik tanpa volume itu "bohong". Konfirmasi trend.</p>
+                            </div>
+                            <button class="btn btn-sm btn-primary module-read-btn" data-module="3-2">Baca</button>
+                        </div>
+                        <div class="module-item" data-module="3-3">
+                            <span class="module-icon">📖</span>
+                            <div class="module-info">
+                                <h3>Market Structure (Wyckoff)</h3>
+                                <p>Fase Akumulasi, Partisipasi, Distribusi — memahami perilaku smart money.</p>
+                            </div>
+                            <button class="btn btn-sm btn-primary module-read-btn" data-module="3-3">Baca</button>
+                        </div>
+                        <div class="module-item" data-module="3-4">
+                            <span class="module-icon">📖</span>
+                            <div class="module-info">
+                                <h3>Backtesting Strategi</h3>
+                                <p>Cara menguji strategi trading di data historis sebelum pakai uang asli.</p>
+                            </div>
+                            <button class="btn btn-sm btn-primary module-read-btn" data-module="3-4">Baca</button>
+                        </div>
+                    </div>
+                    <div class="level-footer">
+                        <div class="level-progress">
+                            <div class="level-progress-bar" id="levelProgress3" style="width:0%"></div>
+                        </div>
+                        <button class="btn btn-accent quiz-start-btn" data-level="3" id="quizBtn3" disabled>🎯 Mulai Kuis Level 3</button>
+                    </div>
+                </div>
+
+                <!-- Level 4: Psychology & Risk -->
+                <div class="level-card locked" data-level="4" id="levelCard4">
+                    <div class="level-lock-overlay"><span>🔒</span><p>Selesaikan Kuis Level 3 untuk membuka</p></div>
+                    <div class="level-header">
+                        <div class="level-badge">Level 4</div>
+                        <h2>🧠 Psychology & Risk Management</h2>
+                        <div class="level-status" id="levelStatus4">Terkunci</div>
+                    </div>
+                    <div class="level-modules">
+                        <div class="module-item" data-module="4-1">
+                            <span class="module-icon">📖</span>
+                            <div class="module-info">
+                                <h3>Bias Kognitif Investor</h3>
+                                <p>Confirmation bias, anchoring, loss aversion — musuh terbesar investor.</p>
+                            </div>
+                            <button class="btn btn-sm btn-primary module-read-btn" data-module="4-1">Baca</button>
+                        </div>
+                        <div class="module-item" data-module="4-2">
+                            <span class="module-icon">📖</span>
+                            <div class="module-info">
+                                <h3>Position Sizing & Stop Loss</h3>
+                                <p>Berapa persen modal per transaksi? Kapan harus cut loss?</p>
+                            </div>
+                            <button class="btn btn-sm btn-primary module-read-btn" data-module="4-2">Baca</button>
+                        </div>
+                        <div class="module-item" data-module="4-3">
+                            <span class="module-icon">📖</span>
+                            <div class="module-info">
+                                <h3>Membuat Trading Plan</h3>
+                                <p>Template lengkap: entry criteria, exit criteria, risk per trade.</p>
+                            </div>
+                            <button class="btn btn-sm btn-primary module-read-btn" data-module="4-3">Baca</button>
+                        </div>
+                        <div class="module-item" data-module="4-4">
+                            <span class="module-icon">📖</span>
+                            <div class="module-info">
+                                <h3>Journaling & Review</h3>
+                                <p>Pentingnya mencatat setiap transaksi dan evaluasi berkala.</p>
+                            </div>
+                            <button class="btn btn-sm btn-primary module-read-btn" data-module="4-4">Baca</button>
+                        </div>
+                    </div>
+                    <div class="level-footer">
+                        <div class="level-progress">
+                            <div class="level-progress-bar" id="levelProgress4" style="width:0%"></div>
+                        </div>
+                        <button class="btn btn-accent quiz-start-btn" data-level="4" id="quizBtn4" disabled>🎯 Mulai Kuis Level 4</button>
+                    </div>
+                </div>
+
+                <!-- Level 5: Elite -->
+                <div class="level-card locked" data-level="5" id="levelCard5">
+                    <div class="level-lock-overlay"><span>🔒</span><p>Selesaikan Kuis Level 4 untuk membuka</p></div>
+                    <div class="level-header">
+                        <div class="level-badge">Level 5</div>
+                        <h2>👑 Elite — The Complete Investor</h2>
+                        <div class="level-status" id="levelStatus5">Terkunci</div>
+                    </div>
+                    <div class="level-modules">
+                        <div class="module-item" data-module="5-1">
+                            <span class="module-icon">📖</span>
+                            <div class="module-info">
+                                <h3>Portfolio Construction</h3>
+                                <p>Diversifikasi modern: korelasi aset, hedging, rebalancing.</p>
+                            </div>
+                            <button class="btn btn-sm btn-primary module-read-btn" data-module="5-1">Baca</button>
+                        </div>
+                        <div class="module-item" data-module="5-2">
+                            <span class="module-icon">📖</span>
+                            <div class="module-info">
+                                <h3>Macro Economics untuk Investor</h3>
+                                <p>Suku bunga, inflasi, PMI — dampaknya ke IHSG.</p>
+                            </div>
+                            <button class="btn btn-sm btn-primary module-read-btn" data-module="5-2">Baca</button>
+                        </div>
+                        <div class="module-item" data-module="5-3">
+                            <span class="module-icon">📖</span>
+                            <div class="module-info">
+                                <h3>Sector Rotation & Thematic Investing</h3>
+                                <p>Kapan masuk banking, CPO, tech? Baca siklus ekonomi.</p>
+                            </div>
+                            <button class="btn btn-sm btn-primary module-read-btn" data-module="5-3">Baca</button>
+                        </div>
+                        <div class="module-item" data-module="5-4">
+                            <span class="module-icon">🏆</span>
+                            <div class="module-info">
+                                <h3>Final Assessment — Sertifikasi</h3>
+                                <p>Ujian akhir komprehensif. Dapatkan sertifikat StockFlow Elite!</p>
+                            </div>
+                            <button class="btn btn-sm btn-primary module-read-btn" data-module="5-4">Baca</button>
+                        </div>
+                    </div>
+                    <div class="level-footer">
+                        <div class="level-progress">
+                            <div class="level-progress-bar" id="levelProgress5" style="width:0%"></div>
+                        </div>
+                        <button class="btn btn-accent quiz-start-btn" data-level="5" id="quizBtn5" disabled>🎯 Mulai Kuis Level 5</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== MODULE READER (OVERLAY) ===== -->
+        <div class="modal-overlay" id="moduleReaderOverlay">
+            <div class="module-reader" id="moduleReader">
+                <div class="reader-header">
+                    <h2 id="readerTitle">Module Title</h2>
+                    <button class="btn-close" id="readerClose">✕</button>
+                </div>
+                <div class="reader-content" id="readerContent"></div>
+                <div class="reader-footer">
+                    <div class="reader-progress-info">
+                        <span id="readerProgressText">Baca sampai selesai untuk mendapat XP</span>
+                    </div>
+                    <button class="btn btn-primary" id="readerCompleteBtn">✅ Tandai Selesai (+50 XP)</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== QUIZ PAGE ===== -->
+        <section class="page" id="page-quiz">
+            <div class="page-header">
+                <h1>❓ Quiz Arena</h1>
+                <p class="page-subtitle">Uji pemahaman investasi kamu. Jawaban salah juga memberi pelajaran!</p>
+            </div>
+            <div class="quiz-container" id="quizContainer">
+                <div class="quiz-header-bar">
+                    <span class="quiz-level-label" id="quizLevelLabel">Level 1 Quiz</span>
+                    <span class="quiz-progress" id="quizProgress">Soal 1/10</span>
+                    <span class="quiz-score" id="quizScoreDisplay">Skor: 0</span>
+                </div>
+                <div class="quiz-question-card" id="quizQuestionCard">
+                    <div class="quiz-question-number" id="quizQuestionNumber">1</div>
+                    <p class="quiz-question-text" id="quizQuestionText">Pertanyaan akan muncul di sini...</p>
+                    <div class="quiz-options" id="quizOptions">
+                        <!-- generated by JS -->
+                    </div>
+                    <div class="quiz-explanation hidden" id="quizExplanation"></div>
+                </div>
+                <div class="quiz-actions">
+                    <button class="btn btn-primary hidden" id="quizNextBtn">Soal Berikutnya →</button>
+                </div>
+                <div class="quiz-result hidden" id="quizResult">
+                    <div class="result-icon" id="resultIcon"></div>
+                    <h2 id="resultTitle">Hasil Kuis</h2>
+                    <p id="resultMessage"></p>
+                    <div class="result-score" id="resultScore"></div>
+                    <div class="result-xp" id="resultXP"></div>
+                    <button class="btn btn-primary" id="quizRetryBtn">Coba Lagi</button>
+                    <button class="btn btn-accent hidden" id="quizContinueBtn">Lanjut ke Level Berikutnya 🎉</button>
+                </div>
+            </div>
+            <!-- Quiz selection when no quiz is active -->
+            <div class="quiz-select" id="quizSelect">
+                <h2>Pilih Level Kuis</h2>
+                <div class="quiz-level-grid" id="quizLevelGrid">
+                    <!-- generated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== VIRTUAL PORTFOLIO PAGE ===== -->
+        <section class="page" id="page-portfolio">
+            <div class="page-header">
+                <h1>💼 Virtual Portfolio</h1>
+                <p class="page-subtitle">Latihan trading dengan uang virtual Rp100.000.000. Tanpa risiko, pembelajaran nyata.</p>
+            </div>
+            <div class="portfolio-stats-row">
+                <div class="pstat">
+                    <span class="pstat-label">Total Portfolio</span>
+                    <span class="pstat-value" id="portfolioTotal">Rp 100.000.000</span>
+                </div>
+                <div class="pstat">
+                    <span class="pstat-label">Cash Available</span>
+                    <span class="pstat-value" id="portfolioCash">Rp 100.000.000</span>
+                </div>
+                <div class="pstat">
+                    <span class="pstat-label">Total P&L</span>
+                    <span class="pstat-value pstat-neutral" id="portfolioPnL">Rp 0 (0%)</span>
+                </div>
+                <div class="pstat">
+                    <span class="pstat-label">Transaksi</span>
+                    <span class="pstat-value" id="portfolioTxCount">0</span>
+                </div>
+            </div>
+
+            <div class="portfolio-grid">
+                <!-- Stock Market -->
+                <div class="card market-card">
+                    <div class="card-header">
+                        <h2>📊 Pasar Saham</h2>
+                        <button class="btn btn-sm btn-ghost" id="refreshMarket">↻ Refresh</button>
+                    </div>
+                    <div class="market-table-wrap">
+                        <table class="market-table" id="marketTable">
+                            <thead>
+                                <tr><th>Kode</th><th>Nama</th><th>Harga</th><th>Perubahan</th><th>Aksi</th></tr>
+                            </thead>
+                            <tbody id="marketTableBody">
+                                <!-- generated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Holdings -->
+                <div class="card holdings-card">
+                    <div class="card-header">
+                        <h2>📁 Holdings</h2>
+                    </div>
+                    <div id="holdingsContainer">
+                        <div class="holdings-empty">Belum ada saham. Beli saham pertamamu!</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trade Modal -->
+            <div class="modal-overlay hidden" id="tradeModal">
+                <div class="modal trade-modal">
+                    <div class="modal-header">
+                        <h2 id="tradeModalTitle">Beli Saham</h2>
+                        <button class="btn-close" id="tradeModalClose">✕</button>
+                    </div>
+                    <div class="trade-info">
+                        <span class="trade-stock-name" id="tradeStockName">BBCA</span>
+                        <span class="trade-stock-price" id="tradeStockPrice">Rp 9.500</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Jumlah Lot (1 lot = 100 lembar)</label>
+                        <input type="number" id="tradeLotInput" min="1" value="1" class="form-input">
+                        <div class="trade-total">Total: <span id="tradeTotalCost">Rp 950.000</span></div>
+                    </div>
+                    <div class="modal-actions">
+                        <button class="btn btn-buy" id="tradeConfirmBuy">Beli</button>
+                        <button class="btn btn-sell hidden" id="tradeConfirmSell">Jual</button>
+                        <button class="btn btn-ghost" id="tradeCancelBtn">Batal</button>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-ghost" id="resetPortfolio" style="margin-top:16px;">🔄 Reset Portfolio</button>
+        </section>
+
+        <!-- ===== PANIC SIMULATOR PAGE ===== -->
+        <section class="page" id="page-panic">
+            <div class="page-header">
+                <h1>😱 Panic Button Simulator</h1>
+                <p class="page-subtitle">Rasakan tekanan market crash sesungguhnya. Apakah kamu panik atau tetap tenang?</p>
+            </div>
+            <div class="panic-container" id="panicContainer">
+                <!-- Scenario selection -->
+                <div class="panic-select" id="panicSelect">
+                    <div class="scenario-card" data-scenario="2008">
+                        <div class="scenario-icon">🏦</div>
+                        <h3>Global Financial Crisis 2008</h3>
+                        <p>IHSG anjlok 60% dalam 8 bulan. Lehman Brothers kolaps.</p>
+                        <span class="scenario-difficulty">🔴 Extreme</span>
+                        <button class="btn btn-primary scenario-start-btn" data-scenario="2008">Mulai Simulasi</button>
+                    </div>
+                    <div class="scenario-card" data-scenario="2020">
+                        <div class="scenario-icon">🦠</div>
+                        <h3>COVID-19 Black Swan 2020</h3>
+                        <p>IHSG turun 38% dalam 1 bulan. Circuit breaker berkali-kali.</p>
+                        <span class="scenario-difficulty">🟠 Hard</span>
+                        <button class="btn btn-primary scenario-start-btn" data-scenario="2020">Mulai Simulasi</button>
+                    </div>
+                </div>
+                <!-- Simulation running -->
+                <div class="panic-simulation hidden" id="panicSimulation">
+                    <div class="panic-header-bar">
+                        <span class="panic-scenario-label" id="panicScenarioLabel">Skenario 2008</span>
+                        <span class="panic-day" id="panicDay">Hari 1</span>
+                        <span class="panic-timer" id="panicTimer">⏱ 15s</span>
+                    </div>
+                    <div class="panic-portfolio-display">
+                        <div class="panic-stat">
+                            <span>Portfolio Awal</span>
+                            <span id="panicStartValue">Rp 100.000.000</span>
+                        </div>
+                        <div class="panic-stat panic-stat-highlight">
+                            <span>Portfolio Saat Ini</span>
+                            <span id="panicCurrentValue" class="panic-value-down">Rp 100.000.000</span>
+                        </div>
+                        <div class="panic-stat">
+                            <span>Unrealized P&L</span>
+                            <span id="panicPnL" class="panic-value-down">Rp 0 (0%)</span>
+                        </div>
+                    </div>
+                    <div class="panic-news-ticker" id="panicNewsTicker">
+                        <span class="ticker-label">📰 BREAKING:</span>
+                        <span id="panicNewsText">Berita akan muncul di sini...</span>
+                    </div>
+                    <div class="panic-chart-area" id="panicChart">
+                        <!-- Simple chart drawn by JS -->
+                        <canvas id="panicCanvas" width="700" height="250"></canvas>
+                    </div>
+                    <div class="panic-decision">
+                        <h3>Apa keputusanmu?</h3>
+                        <div class="panic-buttons">
+                            <button class="btn btn-sell btn-lg" id="panicSellBtn">🏃 JUAL SEMUA! (Panic Sell)</button>
+                            <button class="btn btn-ghost btn-lg" id="panicStopLossBtn">🛡️ Pasang Stop Loss 10%</button>
+                            <button class="btn btn-buy btn-lg" id="panicHoldBtn">💎 HOLD! (Diamond Hands)</button>
+                            <button class="btn btn-accent btn-lg" id="panicBuyBtn">🛒 BELI LEBIH BANYAK!</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Result -->
+                <div class="panic-result hidden" id="panicResult">
+                    <div class="panic-result-icon" id="panicResultIcon"></div>
+                    <h2 id="panicResultTitle">Hasil Simulasi</h2>
+                    <p id="panicResultMessage"></p>
+                    <div class="panic-result-stats" id="panicResultStats"></div>
+                    <button class="btn btn-primary" id="panicReplayBtn">🔄 Main Lagi</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== FACT-CHECK PAGE ===== -->
+        <section class="page" id="page-factcheck">
+            <div class="page-header">
+                <h1>🔍 Fact-Check Tool</h1>
+                <p class="page-subtitle">Cari istilah investasi. Kenali mana yang bahaya, mana yang terpercaya.</p>
+            </div>
+            <div class="factcheck-search">
+                <input type="text" id="factcheckInput" class="form-input form-input-lg" placeholder='Cari istilah... contoh: "Pom-pom", "Window Dressing"'>
+                <button class="btn btn-primary" id="factcheckSearchBtn">🔍 Cari</button>
+            </div>
+            <div class="factcheck-tags" id="factcheckTags">
+                <span class="fact-tag" data-term="pom-pom">Pom-pom</span>
+                <span class="fact-tag" data-term="window dressing">Window Dressing</span>
+                <span class="fact-tag" data-term="signal saham">Signal Saham</span>
+                <span class="fact-tag" data-term="auto profit">Auto Profit</span>
+                <span class="fact-tag" data-term="bandar">Bandar</span>
+                <span class="fact-tag" data-term="saham gorengan">Saham Gorengan</span>
+                <span class="fact-tag" data-term="cut loss">Cut Loss</span>
+                <span class="fact-tag" data-term="averaging down">Averaging Down</span>
+                <span class="fact-tag" data-term="insider trading">Insider Trading</span>
+                <span class="fact-tag" data-term="margin call">Margin Call</span>
+            </div>
+            <div class="factcheck-results" id="factcheckResults">
+                <div class="factcheck-placeholder">
+                    <span class="factcheck-placeholder-icon">🛡️</span>
+                    <p>Ketik istilah di atas untuk melihat penjelasan lengkap dan tingkat bahayanya.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== RISK PROFILE PAGE ===== -->
+        <section class="page" id="page-riskprofile">
+            <div class="page-header">
+                <h1>🧠 Risk Profile Questionnaire</h1>
+                <p class="page-subtitle">10 pertanyaan untuk memetakan tipe psikologi investasi kamu secara akurat.</p>
+            </div>
+            <div class="risk-container" id="riskContainer">
+                <div class="risk-intro" id="riskIntro">
+                    <div class="risk-intro-icon">🎭</div>
+                    <h2>Kenali Dirimu sebagai Investor</h2>
+                    <p>Ini bukan kuesioner formalitas. Jawab dengan jujur untuk mendapat profil risiko yang akurat dan strategi yang sesuai kepribadianmu.</p>
+                    <button class="btn btn-primary btn-lg" id="riskStartBtn">Mulai Kuesioner</button>
+                </div>
+                <div class="risk-questionnaire hidden" id="riskQuestionnaire">
+                    <div class="risk-progress-bar">
+                        <div class="risk-progress-fill" id="riskProgressFill" style="width:10%"></div>
+                    </div>
+                    <div class="risk-question-counter" id="riskQuestionCounter">Pertanyaan 1 dari 10</div>
+                    <div class="risk-question-card" id="riskQuestionCard">
+                        <p class="risk-question-text" id="riskQuestionText"></p>
+                        <div class="risk-options" id="riskOptions"></div>
+                    </div>
+                </div>
+                <div class="risk-result hidden" id="riskResult">
+                    <div class="risk-result-badge" id="riskResultBadge"></div>
+                    <h2 id="riskResultTitle">Profil Risiko Kamu</h2>
+                    <div class="risk-result-type" id="riskResultType"></div>
+                    <p id="riskResultDesc"></p>
+                    <div class="risk-strategy" id="riskStrategy"></div>
+                    <button class="btn btn-primary" id="riskRetakeBtn">🔄 Ambil Ulang Kuesioner</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== AI TUTOR STOCKY PAGE ===== -->
+        <section class="page" id="page-stocky">
+            <div class="page-header">
+                <h1>🤖 AI Tutor — Stocky</h1>
+                <p class="page-subtitle">Tanya apapun tentang saham. Stocky akan memberikan penjelasan yang mudah dipahami.</p>
+            </div>
+            <div class="chat-container" id="chatContainer">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="chat-message bot-message">
+                        <div class="chat-avatar bot-avatar">🤖</div>
+                        <div class="chat-bubble">
+                            <p>Halo! Saya <strong>Stocky</strong>, AI tutor kamu untuk belajar saham. 📈</p>
+                            <p>Tanya saya apapun, misalnya:</p>
+                            <ul>
+                                <li>"Kenapa saham BBCA turun padahal labanya naik?"</li>
+                                <li>"Apa itu PER dan bagaimana cara membacanya?"</li>
+                                <li>"Apa bedanya growth investing dan value investing?"</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-suggestions" id="chatSuggestions">
+                    <button class="suggestion-chip" data-q="Apa itu PER?">Apa itu PER?</button>
+                    <button class="suggestion-chip" data-q="Kenapa saham BBCA turun padahal labanya naik?">Kenapa BBCA turun?</button>
+                    <button class="suggestion-chip" data-q="Apa itu priced-in?">Apa itu priced-in?</button>
+                    <button class="suggestion-chip" data-q="Bagaimana cara diversifikasi?">Cara diversifikasi?</button>
+                    <button class="suggestion-chip" data-q="Apa itu stop loss?">Apa itu stop loss?</button>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="chatInput" class="form-input" placeholder="Ketik pertanyaan kamu...">
+                    <button class="btn btn-primary" id="chatSendBtn">Kirim</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== BADGES PAGE ===== -->
+        <section class="page" id="page-badges">
+            <div class="page-header">
+                <h1>🏆 Badges of Honor</h1>
+                <p class="page-subtitle">Koleksi badge-mu. Setiap pencapaian membuktikan progresmu sebagai investor.</p>
+            </div>
+            <div class="badges-grid" id="badgesGrid">
+                <!-- generated by JS -->
+            </div>
+        </section>
+
+        <!-- ===== STOCK ANALYSIS PAGE ===== -->
+        <section class="page" id="page-analysis">
+            <div class="page-header">
+                <h1>📈 Stock Analysis — Dashboard 5 Menit</h1>
+                <p class="page-subtitle">5 data krusial yang cukup untuk keputusan awal. Tanpa information overload.</p>
+            </div>
+            <div class="analysis-search">
+                <input type="text" id="analysisInput" class="form-input form-input-lg" placeholder="Masukkan kode saham... contoh: BBCA">
+                <button class="btn btn-primary" id="analysisSearchBtn">🔍 Analisis</button>
+            </div>
+            <div class="analysis-quick-picks">
+                <span class="analysis-pick" data-stock="BBCA">BBCA</span>
+                <span class="analysis-pick" data-stock="BBRI">BBRI</span>
+                <span class="analysis-pick" data-stock="TLKM">TLKM</span>
+                <span class="analysis-pick" data-stock="ASII">ASII</span>
+                <span class="analysis-pick" data-stock="UNVR">UNVR</span>
+                <span class="analysis-pick" data-stock="GOTO">GOTO</span>
+            </div>
+            <div class="analysis-dashboard hidden" id="analysisDashboard">
+                <div class="analysis-header-row">
+                    <div>
+                        <h2 id="analysisStockName">PT Bank Central Asia Tbk</h2>
+                        <span class="analysis-stock-code" id="analysisStockCode">BBCA</span>
+                    </div>
+                    <div class="analysis-price-display">
+                        <span class="analysis-price" id="analysisPrice">Rp 9.500</span>
+                        <span class="analysis-change" id="analysisChange">+1.2%</span>
+                    </div>
+                </div>
+
+                <div class="analysis-grid">
+                    <div class="analysis-metric-card">
+                        <div class="metric-header">
+                            <span class="metric-icon">📊</span>
+                            <span class="metric-name">PER (Price to Earning Ratio)</span>
+                        </div>
+                        <div class="metric-value" id="metricPER">24.5x</div>
+                        <div class="metric-verdict" id="metricPERVerdict">Moderat — Rata-rata sektor banking</div>
+                        <div class="metric-explanation">Semakin rendah PER (< 15x), semakin murah. Tapi perlu konteks sektor.</div>
+                    </div>
+                    <div class="analysis-metric-card">
+                        <div class="metric-header">
+                            <span class="metric-icon">💰</span>
+                            <span class="metric-name">PBV (Price to Book Value)</span>
+                        </div>
+                        <div class="metric-value" id="metricPBV">4.8x</div>
+                        <div class="metric-verdict" id="metricPBVVerdict">Premium — Mencerminkan kualitas manajemen</div>
+                        <div class="metric-explanation">PBV > 1 berarti pasar menilai perusahaan di atas nilai bukunya.</div>
+                    </div>
+                    <div class="analysis-metric-card">
+                        <div class="metric-header">
+                            <span class="metric-icon">📈</span>
+                            <span class="metric-name">ROE (Return on Equity)</span>
+                        </div>
+                        <div class="metric-value" id="metricROE">20.1%</div>
+                        <div class="metric-verdict" id="metricROEVerdict">Excellent — Di atas 15% konsisten</div>
+                        <div class="metric-explanation">ROE > 15% menunjukkan perusahaan efisien menggunakan modal pemegang saham.</div>
+                    </div>
+                    <div class="analysis-metric-card">
+                        <div class="metric-header">
+                            <span class="metric-icon">⚖️</span>
+                            <span class="metric-name">DER (Debt to Equity Ratio)</span>
+                        </div>
+                        <div class="metric-value" id="metricDER">4.2x</div>
+                        <div class="metric-verdict" id="metricDERVerdict">Normal untuk bank — sektor ini memang high leverage</div>
+                        <div class="metric-explanation">DER tinggi di banking wajar. Untuk manufaktur, DER > 2x perlu waspada.</div>
+                    </div>
+                    <div class="analysis-metric-card">
+                        <div class="metric-header">
+                            <span class="metric-icon">🚀</span>
+                            <span class="metric-name">Revenue Growth (YoY)</span>
+                        </div>
+                        <div class="metric-value" id="metricGrowth">+12.3%</div>
+                        <div class="metric-verdict" id="metricGrowthVerdict">Solid — Pertumbuhan double digit</div>
+                        <div class="metric-explanation">Pertumbuhan pendapatan konsisten menunjukkan bisnis yang sehat.</div>
+                    </div>
+                </div>
+
+                <div class="analysis-transparency">
+                    <div class="transparency-label">
+                        <span class="transparency-icon">⚠️</span>
+                        <strong>Transparency Label:</strong> Data ini bersifat edukatif. Selalu verifikasi ke sumber resmi sebelum mengambil keputusan investasi.
+                    </div>
+                    <div class="transparency-links">
+                        <a href="https://www.idx.co.id" target="_blank" class="source-link">📄 Sumber: Bursa Efek Indonesia (IDX)</a>
+                        <span class="probability-label">Probability of Success: Tidak ada jaminan — selalu terapkan risk management.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="analysis-tool-card">
+                <div class="card-header">
+                    <h2>🧪 Stock Eligibility Detector</h2>
+                    <p class="analysis-tool-description">Masukkan metrik utama untuk mendapatkan skor kelayakan awal. Ini bukan rekomendasi, melainkan filter cepat.</p>
+                </div>
+                <div class="analysis-tool-grid">
+                    <div class="form-group">
+                        <label>Mean PER 5th</label>
+                        <input type="number" step="0.1" id="eligibilityPER" class="form-input" placeholder="Contoh: 15">
+                    </div>
+                    <div class="form-group">
+                        <label>Mean PBV 5th</label>
+                        <input type="number" step="0.1" id="eligibilityPBV" class="form-input" placeholder="Contoh: 2.5">
+                    </div>
+                    <div class="form-group">
+                        <label>5th BVPS</label>
+                        <input type="number" step="0.1" id="eligibilityBVPS" class="form-input" placeholder="Contoh: 4500">
+                    </div>
+                    <div class="form-group">
+                        <label>ROE (%)</label>
+                        <input type="number" step="0.1" id="eligibilityROE" class="form-input" placeholder="Contoh: 18">
+                    </div>
+                    <div class="form-group">
+                        <label>DER</label>
+                        <input type="number" step="0.1" id="eligibilityDER" class="form-input" placeholder="Contoh: 1.8">
+                    </div>
+                    <div class="form-group">
+                        <label>Div Yield (%)</label>
+                        <input type="number" step="0.1" id="eligibilityDivYield" class="form-input" placeholder="Contoh: 3.5">
+                    </div>
+                    <div class="form-group">
+                        <label>EPS 3 Tahun Terakhir</label>
+                        <input type="number" step="0.1" id="eligibilityEPS" class="form-input" placeholder="Contoh: 850">
+                    </div>
+                    <div class="form-group">
+                        <label>Harga Saham Saat Ini</label>
+                        <input type="number" step="0.1" id="eligibilityPrice" class="form-input" placeholder="Contoh: 9200">
+                    </div>
+                </div>
+                <div class="analysis-tool-actions">
+                    <button class="btn btn-primary" id="eligibilityCheckBtn">Hitung Kelayakan Saham</button>
+                    <button class="btn btn-ghost" id="eligibilityResetBtn">Reset</button>
+                </div>
+                <div class="analysis-tool-result hidden" id="eligibilityResult">
+                    <div class="result-badge" id="eligibilityVerdict"></div>
+                    <div class="result-summary" id="eligibilitySummary"></div>
+                    <div class="result-details" id="eligibilityDetails"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== LEVEL UP CELEBRATION ===== -->
+    <div class="celebration-overlay hidden" id="celebrationOverlay">
+        <div class="celebration-content">
+            <div class="celebration-particles" id="celebrationParticles"></div>
+            <div class="celebration-badge" id="celebrationBadge">🎉</div>
+            <h2 id="celebrationTitle">LEVEL UP!</h2>
+            <p id="celebrationMessage">Kamu naik ke Level 2!</p>
+            <button class="btn btn-primary" id="celebrationClose">Lanjutkan</button>
+        </div>
+    </div>
+
+    <!-- ===== TOAST NOTIFICATION ===== -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="app-data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
