@@ -129,4 +129,51 @@ const RISK_QUESTIONS=[
 {q:"Saat market crash, kamu melihat semua orang panik jual. Apa kamu ikut?",o:[{t:"Ya, ikut jual sebelum lebih parah",s:{c:1,a:0,e:3}},{t:"Tidak, tapi sangat gelisah",s:{c:2,a:0,e:1}},{t:"Tidak, malah siapkan cash untuk beli",s:{c:0,a:3,e:0}},{t:"Sudah antisipasi — portfolio sudah defensif",s:{c:3,a:1,e:0}}]},
 {q:"Pernah mendengar 'high risk high return'. Setujukah?",o:[{t:"Setuju — siap ambil risiko besar demi return besar",s:{c:0,a:3,e:0}},{t:"Setuju tapi tetap ukur risiko dulu",s:{c:1,a:2,e:0}},{t:"Kurang setuju — lebih suka return stabil",s:{c:3,a:0,e:0}},{t:"Bingung — takut rugi tapi mau untung besar",s:{c:0,a:0,e:3}}]},
 {q:"Bagaimana reaksimu jika saham yang baru kamu jual ternyata naik 50% setelahnya?",o:[{t:"Sangat menyesal, sulit move on",s:{c:0,a:0,e:3}},{t:"Sedikit kecewa tapi terima — keputusan sudah dibuat",s:{c:2,a:1,e:0}},{t:"Beli lagi meskipun sudah naik banyak",s:{c:0,a:2,e:2}},{t:"Tidak masalah — fokus ke opportunity selanjutnya",s:{c:1,a:2,e:0}}]},
-{q:"Jika harus memilih satu prinsip investasi:",o:[{t:"Proteksi modal nomor 1",s:{c:3,a:0,e:0}},{t:"Cari return maksimal",s:{c:0,a:3,e:0}},{t:"Ikuti trend dan momentum",s:{c:0,a:1,e:2}},{t:"Ikuti apa yang dilakukan investor terkenal",
+{q:"Jika harus memilih satu prinsip investasi:",o:[{t:"Proteksi modal nomor 1",s:{c:3,a:0,e:0}},{t:"Cari return maksimal",s:{c:0,a:3,e:0}},{t:"Ikuti trend dan momentum",s:{c:0,a:1,e:2}},{t:"Ikuti apa yang dilakukan investor terkenal",s:{c:1,a:0,e:2}}]}
+];
+
+const STOCKS=[
+{code:"BBCA",name:"Bank Central Asia",price:9500,sector:"Banking",per:24.5,pbv:4.8,roe:20.1,der:4.2,growth:12.3},
+{code:"BBRI",name:"Bank Rakyat Indonesia",price:4800,sector:"Banking",per:14.2,pbv:2.6,roe:19.5,der:5.1,growth:8.7},
+{code:"TLKM",name:"Telkom Indonesia",price:3200,sector:"Telco",per:16.8,pbv:3.2,roe:18.9,der:0.8,growth:5.4},
+{code:"ASII",name:"Astra International",price:5100,sector:"Multi-sector",per:8.5,pbv:1.3,roe:15.8,der:0.9,growth:7.2},
+{code:"UNVR",name:"Unilever Indonesia",price:3800,sector:"Consumer",per:32.1,pbv:28.5,roe:85.3,der:2.8,growth:-3.1},
+{code:"GOTO",name:"GoTo Gojek Tokopedia",price:54,sector:"Tech",per:-15,pbv:0.8,roe:-12.5,der:0.3,growth:22.5},
+{code:"BMRI",name:"Bank Mandiri",price:6200,sector:"Banking",per:11.5,pbv:2.1,roe:18.2,der:4.8,growth:10.1},
+{code:"ANTM",name:"Aneka Tambang",price:1850,sector:"Mining",per:12.3,pbv:1.5,roe:12.8,der:0.4,growth:15.6},
+{code:"ICBP",name:"Indofood CBP",price:10800,sector:"Consumer",per:18.9,pbv:3.8,roe:20.5,der:0.5,growth:9.3},
+{code:"PGAS",name:"Perusahaan Gas Negara",price:1520,sector:"Energy",per:6.2,pbv:0.9,roe:14.5,der:1.2,growth:4.8}
+];
+
+const BADGES_DEF=[
+{id:"first-login",icon:"👋",name:"Welcome Aboard",desc:"Pertama kali membuka StockFlow Elite",auto:true},
+{id:"first-read",icon:"📖",name:"Bookworm",desc:"Selesai membaca modul pertama"},
+{id:"quiz-l1",icon:"🎓",name:"The Beginner",desc:"Lulus Kuis Level 1"},
+{id:"quiz-l2",icon:"🏛️",name:"The Rationalist",desc:"Lulus Kuis Level 2 (Fundamental)"},
+{id:"quiz-l3",icon:"📉",name:"The Chart Wizard",desc:"Lulus Kuis Level 3 (Teknikal)"},
+{id:"quiz-l4",icon:"🧠",name:"Mind Master",desc:"Lulus Kuis Level 4 (Psychology)"},
+{id:"quiz-l5",icon:"👑",name:"Elite Investor",desc:"Lulus Kuis Level 5 (Elite)"},
+{id:"first-trade",icon:"💹",name:"First Trade",desc:"Melakukan transaksi pertama di Virtual Portfolio"},
+{id:"risk-profile",icon:"🎭",name:"Know Thyself",desc:"Selesai mengisi Risk Profile Questionnaire"},
+{id:"panic-survivor",icon:"💎",name:"Diamond Hands",desc:"Bertahan HOLD di Panic Simulator"},
+{id:"risk-manager",icon:"🛡️",name:"Risk Manager",desc:"Memasang Stop Loss di simulasi"},
+{id:"streak-7",icon:"🔥",name:"On Fire",desc:"Belajar 7 hari berturut-turut"},
+{id:"fact-checker",icon:"🕵️",name:"Fact Checker",desc:"Menggunakan Fact-Check Tool 5 kali"},
+{id:"stocky-fan",icon:"🤖",name:"Stocky's Best Friend",desc:"Bertanya ke AI Tutor 10 kali"},
+{id:"all-l1-modules",icon:"📚",name:"Level 1 Scholar",desc:"Baca semua modul Level 1"},
+{id:"portfolio-profit",icon:"💰",name:"First Profit",desc:"Mendapat profit pertama di Virtual Portfolio"}
+];
+
+const DAILY_QUESTS_POOL=[
+{text:"📖 Baca 1 modul pembelajaran",xp:30,action:"read"},
+{text:"❓ Selesaikan 1 kuis",xp:50,action:"quiz"},
+{text:"💼 Lakukan 1 transaksi virtual",xp:25,action:"trade"},
+{text:"🔍 Cek 1 istilah di Fact-Check",xp:20,action:"factcheck"},
+{text:"🤖 Tanya 1 pertanyaan ke Stocky",xp:20,action:"stocky"},
+{text:"📄 Analisis 1 laporan keuangan hari ini",xp:35,action:"analysis"},
+{text:"📈 Cek RSI saham GOTO hari ini",xp:25,action:"analysis"},
+{text:"🧠 Cek profil risiko kamu",xp:30,action:"riskprofile"},
+{text:"📊 Review portfolio virtual kamu",xp:15,action:"portfolio"}
+];
+
+const PANIC_SCENARIOS={"2008":{name:"Global Financial Crisis 2008",days:[{day:1,change:-3.2,news:"Lehman Brothers mengajukan kebangkrutan! Pasar global panik."},{day:2,change:-5.8,news:"IHSG anjlok! Investor asing kabur dari emerging markets."},{day:3,change:-7.1,news:"Circuit breaker aktif! Perdagangan dihentikan sementara."},{day:4,change:2.3,news:"Dead cat bounce — sedikit rebound teknikal."},{day:5,change:-8.5,news:"Bailout bank gagal di kongres AS. Pasar crash lagi."},{day:6,change:-4.2,news:"Kredit macet melonjak. Bank-bank besar terancam bangkrut."},{day:7,change:-6.7,news:"IHSG sudah turun 40% dari puncak. Kepanikan maksimal."},{day:8,change:1.5,news:"Pemerintah umumkan stimulus. Sedikit harapan."},{day:9,change:5.2,news:"The Fed turunkan suku bunga drastis."},{day:10,change:8.7,news:"6 bulan kemudian — pasar mulai recovery kuat."}]},"2020":{name:"COVID-19 Black Swan 2020",days:[{day:1,change:-5.0,news:"WHO deklarasikan pandemi global! IHSG terjun bebas."},{day:2,change:-5.1,news:"Circuit breaker hari kedua! Trading halt 30 menit."},{day:3,change:-4.8,news:"Kasus COVID melonjak. Lockdown di banyak negara."},{day:4,change:1.2,news:"Sedikit rebound teknikal setelah oversold."},{day:5,change:-6.5,news:"IHSG tembus di bawah 4000! Terburuk sejak 2016."},{day:6,change:-3.3,news:"Oil price war: minyak anjlok, saham energi habis."},{day:7,change:4.5,news:"Stimulus fiskal besar-besaran diumumkan."},{day:8,change:6.2,news:"The Fed unlimited QE — pasar mulai optimis."},{day:9,change:3.8,news:"Vaksin dalam pengembangan — cahaya di ujung terowongan."},{day:10,change:7.5,news:"3 bulan kemudian — V-shape recovery! IHSG rebound kuat."}]}};
